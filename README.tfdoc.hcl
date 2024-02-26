@@ -893,7 +893,7 @@ section {
             END
           }
 
-          attribute "push_restrictions" {
+          attribute "push_allowances" {
             type        = list(string)
             default     = []
             description = <<-END
