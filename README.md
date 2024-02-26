@@ -690,7 +690,7 @@ This is due to some terraform limitation and we will update the module once terr
 
     Default is `true`.
 
-  - [**`push_restrictions`**](#attr-branch_protections_v4-push_restrictions): *(Optional `list(string)`)*<a name="attr-branch_protections_v4-push_restrictions"></a>
+  - [**`push_allowances`**](#attr-branch_protections_v4-push_allowances): *(Optional `list(string)`)*<a name="attr-branch_protections_v4-push_allowances"></a>
 
     The list of actor Names/IDs that may push to the branch.
     Actor names must either begin with a "/" for users or the organization name followed by a "/" for teams.
