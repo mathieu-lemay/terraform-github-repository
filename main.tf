@@ -106,6 +106,7 @@ resource "github_repository" "repository" {
   allow_rebase_merge     = local.allow_rebase_merge
   allow_squash_merge     = local.allow_squash_merge
   allow_auto_merge       = local.allow_auto_merge
+  allow_update_branch    = var.allow_update_branch
   delete_branch_on_merge = local.delete_branch_on_merge
   is_template            = local.is_template
   has_downloads          = local.has_downloads
