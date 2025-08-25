@@ -196,7 +196,7 @@ locals {
   rulesets_map = { for idx, e in var.rulesets : try(e._key, e.pattern) => idx }
 }
 
-resource "github_branch_ruleset" "ruleset" {
+resource "github_repository_ruleset" "ruleset" {
   for_each = local.rulesets_map
 
   # ensure we have all members and collaborators added before applying
