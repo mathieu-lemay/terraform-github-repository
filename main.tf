@@ -214,7 +214,7 @@ resource "github_repository_ruleset" "ruleset" {
   name = var.rulesets[each.value].name
   target = var.rulesets[each.value].target
 
-  rules = {
+  rules {
     required_linear_history = true
   }
 }
