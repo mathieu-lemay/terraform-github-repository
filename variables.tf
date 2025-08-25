@@ -338,12 +338,10 @@ variable "rulesets" {
       {
         enforcement = string
         name        = string
-        rules = list(
-          object(
-            {
-              required_linear_history = optional(bool, false)
-            }
-          )
+        rules = object(
+          {
+            required_linear_history = optional(bool, false)
+          }
         )
         target     = string
         repository = optional(string)
