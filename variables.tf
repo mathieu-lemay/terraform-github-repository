@@ -340,10 +340,12 @@ variable "rulesets" {
         name        = string
         rules = list(
           object(
-
+            {
+              required_linear_history = optional(bool, false)
+            }
           )
         )
-        target                          = string
+        target     = string
         repository = optional(string)
       }
     )
