@@ -215,7 +215,11 @@ resource "github_repository_ruleset" "ruleset" {
   target = var.rulesets[each.value].target
 
   rules {
-    required_linear_history = true
+    creation                = var.rulesets[each.value].rules.creation
+    deletion                = var.rulesets[each.value].rules.deletion
+    non_fast_forward        = var.rulesets[each.value].rules.non_fast_forward
+    required_linear_history = var.rulesets[each.value].rules.required_linear_history
+    required_signatures     = var.rulesets[each.value].rules.required_signatures
   }
 }
 

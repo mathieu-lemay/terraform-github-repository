@@ -340,7 +340,11 @@ variable "rulesets" {
         name        = string
         rules = object(
           {
+            creation                = optional(bool, false)
+            deletion                = optional(bool, false)
+            non_fast_forward        = optional(bool, false)
             required_linear_history = optional(bool, false)
+            required_signatures     = optional(bool, false)
           }
         )
         target     = string
