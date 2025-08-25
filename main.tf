@@ -211,15 +211,16 @@ resource "github_repository_ruleset" "ruleset" {
   repository = github_repository.repository.name
 
   enforcement = try(var.rulesets[each.value].enforcement, "active")
-  name = var.rulesets[each.value].name
-  target = var.rulesets[each.value].target
+  name        = var.rulesets[each.value].name
+  target      = var.rulesets[each.value].target
 
   rules {
-    creation                = var.rulesets[each.value].rules.creation
-    deletion                = var.rulesets[each.value].rules.deletion
-    non_fast_forward        = var.rulesets[each.value].rules.non_fast_forward
-    required_linear_history = var.rulesets[each.value].rules.required_linear_history
-    required_signatures     = var.rulesets[each.value].rules.required_signatures
+    creation                = var.rulesets[each.value].restrict_creation
+    update                  = var.rulesets[each.value].restrict_update
+    deletion                = var.rulesets[each.value].restrict_deletion
+    non_fast_forward        = var.rulesets[each.value].non_fast_forward
+    required_linear_history = var.rulesets[each.value].required_linear_history
+    required_signatures     = var.rulesets[each.value].required_signatures
   }
 }
 

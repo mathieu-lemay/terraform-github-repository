@@ -338,17 +338,15 @@ variable "rulesets" {
       {
         enforcement = string
         name        = string
-        rules = object(
-          {
-            creation                = optional(bool, false)
-            deletion                = optional(bool, false)
-            non_fast_forward        = optional(bool, false)
-            required_linear_history = optional(bool, false)
-            required_signatures     = optional(bool, false)
-          }
-        )
-        target     = string
-        repository = optional(string)
+        target      = string
+        repository  = optional(string)
+
+        restrict_creation       = optional(bool, false)
+        restrict_update         = optional(bool, false)
+        restrict_deletion       = optional(bool, false)
+        non_fast_forward        = optional(bool, false)
+        required_linear_history = optional(bool, false)
+        required_signatures     = optional(bool, false)
       }
     )
   )
