@@ -193,7 +193,7 @@ resource "github_branch_default" "default" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 locals {
-  rulesets_map = { for idx, e in var.rulesets : try(e._key, e.pattern) => idx }
+  rulesets_map = { for idx, e in var.rulesets : try(e._key, e.name) => idx }
 }
 
 resource "github_repository_ruleset" "ruleset" {
