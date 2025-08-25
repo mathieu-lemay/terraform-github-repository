@@ -188,6 +188,38 @@ resource "github_branch_default" "default" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
+# Ruleset
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_ruleset
+# ---------------------------------------------------------------------------------------------------------------------
+
+locals {
+  rulesets_map = { for idx, e in var.rulesets : try(e._key, e.pattern) => idx }
+}
+
+resource "github_branch_ruleset" "ruleset" {
+  for_each = local.rulesets_map
+
+  # ensure we have all members and collaborators added before applying
+  # any configuration for them
+  depends_on = [
+    github_repository_collaborator.collaborator,
+    github_team_repository.team_repository,
+    github_team_repository.team_repository_by_slug,
+    github_branch.branch,
+  ]
+
+  repository = github_repository.repository.name
+
+  enforcement = try(var.rulesets[each.value].enforcement, "active")
+  name = var.rulesets[each.value].name
+  target = var.rulesets[each.value].target
+
+  rules = {
+    required_linear_history = true
+  }
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
 # v4 Branch Protection
 # https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch_protection
 # ---------------------------------------------------------------------------------------------------------------------

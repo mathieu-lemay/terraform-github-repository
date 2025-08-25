@@ -330,6 +330,40 @@ variable "branch_protections_v3" {
   # ]
 }
 
+variable "rulesets" {
+  description = "(Optional) A list of rulesets to apply to the repository. Default is []."
+  # type        = any
+  type = list(
+    object(
+      {
+        enforcement = string
+        name        = string
+        rules = list(
+          object(
+
+          )
+        )
+        target                          = string
+        repository = optional(string)
+      }
+    )
+  )
+  default = []
+
+  validation {
+    condition = alltrue(
+      [
+        for cfg in var.rulesets : try(
+          cfg.required_pull_request_reviews.required_approving_review_count >= 0
+          && cfg.required_pull_request_reviews.required_approving_review_count <= 6,
+          true
+        )
+      ]
+    )
+    error_message = "The value for branch_protections_v4.required_pull_request_reviews.required_approving_review_count must be between 0 and 6, inclusively."
+  }
+}
+
 variable "branch_protections_v4" {
   description = "(Optional) A list of v4 branch protections to apply to the repository. Default is []."
   type        = any
