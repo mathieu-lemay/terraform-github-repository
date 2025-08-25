@@ -341,6 +341,9 @@ variable "rulesets" {
         target      = string
         repository  = optional(string)
 
+        ref_name_exclude_patterns = optional(list(string), [])
+        ref_name_include_patterns = optional(list(string), [])
+
         restrict_creation       = optional(bool, false)
         restrict_update         = optional(bool, false)
         restrict_deletion       = optional(bool, false)

@@ -214,6 +214,13 @@ resource "github_repository_ruleset" "ruleset" {
   name        = var.rulesets[each.value].name
   target      = var.rulesets[each.value].target
 
+  conditions {
+    ref_name {
+      exclude = var.rulesets[each.value].ref_name_exclude_patterns
+      include = var.rulesets[each.value].ref_name_include_patterns
+    }
+  }
+
   rules {
     creation                = var.rulesets[each.value].restrict_creation
     update                  = var.rulesets[each.value].restrict_update
