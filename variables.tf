@@ -330,6 +330,69 @@ variable "branch_protections_v3" {
   # ]
 }
 
+variable "rulesets" {
+  description = "(Optional) A list of rulesets to apply to the repository. Default is []."
+  # type        = any
+  type = list(
+    object(
+      {
+        enforcement = string
+        name        = string
+        target      = string
+        repository  = optional(string)
+
+        ref_name_exclude_patterns = optional(list(string), [])
+        ref_name_include_patterns = optional(list(string), [])
+
+        restrict_creation       = optional(bool, false)
+        restrict_update         = optional(bool, false)
+        restrict_deletion       = optional(bool, false)
+        non_fast_forward        = optional(bool, false)
+        required_linear_history = optional(bool, false)
+        required_signatures     = optional(bool, false)
+
+        pull_request = optional(object(
+          {
+            dismiss_stale_reviews_on_push     = optional(bool, false)
+            require_code_owner_review         = optional(bool, false)
+            require_last_push_approval        = optional(bool, false)
+            required_approving_review_count   = optional(number, 0)
+            required_review_thread_resolution = optional(bool, false)
+          }
+        ))
+
+        required_status_checks = optional(object(
+          {
+            required_checks = list(object(
+              {
+                context        = string
+                integration_id = optional(number)
+              }
+            ))
+
+            strict_required_status_checks_policy = optional(bool, false)
+            do_not_enforce_on_create             = optional(bool, false)
+          }
+        ))
+      }
+    )
+  )
+  default = []
+
+  validation {
+    condition = alltrue(
+      [
+        for cfg in var.rulesets : try(
+          cfg.required_pull_request_reviews.required_approving_review_count >= 0
+          && cfg.required_pull_request_reviews.required_approving_review_count <= 6,
+          true
+        )
+      ]
+    )
+    error_message = "The value for branch_protections_v4.required_pull_request_reviews.required_approving_review_count must be between 0 and 6, inclusively."
+  }
+}
+
 variable "branch_protections_v4" {
   description = "(Optional) A list of v4 branch protections to apply to the repository. Default is []."
   type        = any
