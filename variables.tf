@@ -350,6 +350,30 @@ variable "rulesets" {
         non_fast_forward        = optional(bool, false)
         required_linear_history = optional(bool, false)
         required_signatures     = optional(bool, false)
+
+        pull_request = optional(object(
+          {
+            dismiss_stale_reviews_on_push     = optional(bool, false)
+            require_code_owner_review         = optional(bool, false)
+            require_last_push_approval        = optional(bool, false)
+            required_approving_review_count   = optional(number, 0)
+            required_review_thread_resolution = optional(bool, false)
+          }
+        ))
+
+        required_status_checks = optional(object(
+          {
+            required_checks = list(object(
+              {
+                context        = string
+                integration_id = optional(number)
+              }
+            ))
+
+            strict_required_status_checks_policy = optional(bool, false)
+            do_not_enforce_on_create             = optional(bool, false)
+          }
+        ))
       }
     )
   )
