@@ -221,6 +221,16 @@ resource "github_repository_ruleset" "ruleset" {
     }
   }
 
+  dynamic "bypass_actors" {
+    for_each = var.rulesets[each.value].bypass_actors
+
+    content {
+      actor_id    = bypass_actors.value.actor_id
+      actor_type  = bypass_actors.value.actor_type
+      bypass_mode = bypass_actors.value.bypass_mode
+    }
+  }
+
   rules {
     creation                = var.rulesets[each.value].restrict_creation
     update                  = var.rulesets[each.value].restrict_update
