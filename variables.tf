@@ -344,6 +344,14 @@ variable "rulesets" {
         ref_name_exclude_patterns = optional(list(string), [])
         ref_name_include_patterns = optional(list(string), [])
 
+        bypass_actors = optional(list(object(
+          {
+            actor_id    = number
+            actor_type  = string
+            bypass_mode = optional(string)
+          }
+        )), [])
+
         restrict_creation       = optional(bool, false)
         restrict_update         = optional(bool, false)
         restrict_deletion       = optional(bool, false)
