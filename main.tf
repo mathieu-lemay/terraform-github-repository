@@ -225,9 +225,9 @@ resource "github_repository_ruleset" "ruleset" {
     for_each = var.rulesets[each.value].bypass_actors
 
     content {
-      actor_id    = bypass_actors.each.value.actor_id
-      actor_type  = bypass_actors.each.value.actor_type
-      bypass_mode = bypass_actors.each.value.bypass_mode
+      actor_id    = bypass_actors.value.actor_id
+      actor_type  = bypass_actors.value.actor_type
+      bypass_mode = bypass_actors.value.bypass_mode
     }
   }
 
