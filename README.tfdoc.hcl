@@ -1361,14 +1361,6 @@ section {
       END
     }
 
-    output "projects" {
-      type        = object(project)
-      description = <<-END
-        A map of Project objects keyed by the `id` of the project as returned by
-        the [`github_repository_project`] resource
-      END
-    }
-
     output "issue_labels" {
       type        = object(issue_label)
       description = <<-END
@@ -1409,7 +1401,6 @@ section {
         - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch
         - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborator
         - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_deploy_key
-        - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_project
         - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_autolink_reference
       END
     }
@@ -1499,9 +1490,6 @@ references {
   }
   ref "`github_repository_deploy_key`" {
     value = "https://www.terraform.io/docs/providers/github/r/repository_deploy_key.html#attributes-reference"
-  }
-  ref "`github_repository_project`" {
-    value = "https://www.terraform.io/docs/providers/github/r/repository_project.html#attributes-reference"
   }
   ref "`github_repository_autolink_reference`" {
     value = "https://www.terraform.io/docs/providers/github/r/repository_autolink_reference.html#attributes-reference"

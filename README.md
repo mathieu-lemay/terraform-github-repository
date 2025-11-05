@@ -1026,11 +1026,6 @@ The following attributes are exported by the module:
   [`github_repository_deploy_key`] resource keyed by the input `id` of the
   key.
 
-- [**`projects`**](#output-projects): *(`object(project)`)*<a name="output-projects"></a>
-
-  A map of Project objects keyed by the `id` of the project as returned by
-  the [`github_repository_project`] resource
-
 - [**`issue_labels`**](#output-issue_labels): *(`object(issue_label)`)*<a name="output-issue_labels"></a>
 
   A map of issue labels keyed by label input id or name.
@@ -1056,7 +1051,6 @@ The following attributes are exported by the module:
 - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch
 - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_collaborator
 - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_deploy_key
-- https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_project
 - https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_autolink_reference
 
 ## Module Versioning
@@ -1116,7 +1110,6 @@ Copyright &copy; 2020-2022 [Mineiros GmbH][homepage]
 [`github_repository`]: https://www.terraform.io/docs/providers/github/r/repository.html#attributes-reference
 [`github_repository_collaborator`]: https://www.terraform.io/docs/providers/github/r/repository_collaborator.html#attribute-reference
 [`github_repository_deploy_key`]: https://www.terraform.io/docs/providers/github/r/repository_deploy_key.html#attributes-reference
-[`github_repository_project`]: https://www.terraform.io/docs/providers/github/r/repository_project.html#attributes-reference
 [`github_repository_autolink_reference`]: https://www.terraform.io/docs/providers/github/r/repository_autolink_reference.html#attributes-reference
 [homepage]: https://mineiros.io/?ref=terraform-github-repository
 [github-as-code]: https://mineiros.io/github-as-code?ref=terraform-github-repository
