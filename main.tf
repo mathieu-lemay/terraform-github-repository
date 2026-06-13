@@ -244,6 +244,7 @@ resource "github_repository_ruleset" "ruleset" {
         require_last_push_approval        = pull_request.value.require_last_push_approval
         required_approving_review_count   = pull_request.value.required_approving_review_count
         required_review_thread_resolution = pull_request.value.required_review_thread_resolution
+        allowed_merge_methods             = pull_request.value.allowed_merge_methods
       }
     }
 

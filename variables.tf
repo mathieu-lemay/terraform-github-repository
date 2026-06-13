@@ -360,6 +360,7 @@ variable "rulesets" {
             require_last_push_approval        = optional(bool, false)
             required_approving_review_count   = optional(number, 0)
             required_review_thread_resolution = optional(bool, false)
+            allowed_merge_methods             = optional(list(string), ["merge", "rebase", "squash"])
           }
         ))
 
