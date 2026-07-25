@@ -41,6 +41,11 @@ output "branches" {
   description = "A map of branch objects keyed by branch name."
 }
 
+output "default_branch" {
+  value       = [for b in github_branch_default.default : b.branch]
+  description = "The default branch of the repository."
+}
+
 output "collaborators" {
   value       = github_repository_collaborator.collaborator
   description = "A map of collaborator objects keyed by collaborator.name."
