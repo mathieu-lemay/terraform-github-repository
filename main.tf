@@ -113,7 +113,6 @@ resource "github_repository" "repository" {
   topics                 = local.topics
 
   archive_on_destroy   = var.archive_on_destroy
-  vulnerability_alerts = local.vulnerability_alerts
 
   squash_merge_commit_title   = local.squash_merge_commit_title
   squash_merge_commit_message = local.squash_merge_commit_message
@@ -126,18 +125,6 @@ resource "github_repository" "repository" {
     content {
       owner      = template.value.owner
       repository = template.value.repository
-    }
-  }
-
-  dynamic "pages" {
-    for_each = var.pages != null ? [true] : []
-
-    content {
-      source {
-        branch = var.pages.branch
-        path   = try(var.pages.path, "/")
-      }
-      cname = try(var.pages.cname, null)
     }
   }
 
@@ -644,4 +631,29 @@ resource "github_app_installation_repository" "app_installation_repository" {
 
   repository      = github_repository.repository.name
   installation_id = each.value
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Pages
+# ---------------------------------------------------------------------------------------------------------------------
+
+resource "github_repository_pages" "repository_pages" {
+  count = var.pages != null ? 1 : 0
+
+  repository      = github_repository.repository.name
+
+  source {
+    branch = var.pages.branch
+    path   = try(var.pages.path, "/")
+  }
+  cname = try(var.pages.cname, null)
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Vulnerability Alerts
+# ---------------------------------------------------------------------------------------------------------------------
+
+resource "github_repository_vulnerability_alerts" "repository_vulnerability_alerts" {
+  repository      = github_repository.repository.name
+  enabled = local.vulnerability_alerts
 }
