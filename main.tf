@@ -112,7 +112,7 @@ resource "github_repository" "repository" {
   archived               = var.archived
   topics                 = local.topics
 
-  archive_on_destroy   = var.archive_on_destroy
+  archive_on_destroy = var.archive_on_destroy
 
   squash_merge_commit_title   = local.squash_merge_commit_title
   squash_merge_commit_message = local.squash_merge_commit_message
@@ -640,7 +640,7 @@ resource "github_app_installation_repository" "app_installation_repository" {
 resource "github_repository_pages" "repository_pages" {
   count = var.pages != null ? 1 : 0
 
-  repository      = github_repository.repository.name
+  repository = github_repository.repository.name
 
   source {
     branch = var.pages.branch
@@ -654,6 +654,8 @@ resource "github_repository_pages" "repository_pages" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "github_repository_vulnerability_alerts" "repository_vulnerability_alerts" {
-  repository      = github_repository.repository.name
-  enabled = local.vulnerability_alerts
+  count = var.archived != true ? 1 : 0
+
+  repository = github_repository.repository.name
+  enabled    = local.vulnerability_alerts
 }
